@@ -8,5 +8,5 @@
             <Navbar />
         </header>
     </div>
-    <h1 class = "text-[4rem] font-black text-center">Events!</h1>
+    <h1 class = "text-[4rem] font-black text-center">Events</h1>
 </main>
