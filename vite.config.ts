@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => ({
 				fallback: '404.html'
 			}),
 			paths: {
-				base: command === 'serve' ? '' : 'nhs-website'
+				base: command === 'serve' ? '' : '/nhs-website'
 			}
 		})
 	]
