@@ -3,7 +3,7 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
 	plugins: [
 		tailwindcss(),
 		sveltekit({
@@ -16,8 +16,8 @@ export default defineConfig({
 				fallback: '404.html'
 			}),
 			paths: {
-				base: process.argv.includes('dev') ? '' : '/<REPO_NAME>'
+				base: command === 'serve' ? '' : 'nhs-website'
 			}
 		})
 	]
-});
+}));
