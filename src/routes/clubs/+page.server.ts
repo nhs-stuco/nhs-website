@@ -1,29 +1,44 @@
-import { GOOGLE_SHEETS_API_KEY, GOOGLE_SHEET_ID } from '$app/env/public';
+import { GOOGLE_SHEET_ID, GOOGLE_SHEETS_API_KEY } from '$app/env/public';
 import type { PageServerLoad } from './$types';
-import type { ClubInfo } from '../../lib/components/ClubCard.svelte';
+
+export interface ClubInfo {
+	name: string;
+	description: string;
+	room: string;
+	day: string;
+	studentLeader: string;
+	teacher: string;
+	instagram?: string;
+}
 
 export const load: PageServerLoad = async ({ fetch }) => {
-  const sheetName = 'Sheet1'; 
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
+	console.log('--- LOADING CLUBS ---');
+	const sheetName = 'Sheet1';
+	const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
 
-  const res = await fetch(url);
-  if (!res.ok) {
-    return { clubs: [] };
-  }
+	const res = await fetch(url);
+	if (!res.ok) {
+		console.error('Google Sheets API Error:', res.status, await res.text());
+		return { clubs: [] };
+	}
 
-  const data = await res.json();
-  const rows: string[][] = data.values ?? [];
+	const data = await res.json();
+	console.log('Google Sheets response:', JSON.stringify(data, null, 2));
 
-  // Skip the first row (headers) and map columns A–G
-  const clubs: ClubInfo[] = rows.slice(1).map((row) => ({
-    name: row[0] ?? '',
-    description: row[1] ?? '',
-    room: row[2] ?? '',
-    day: row[3] ?? '',
-    studentLeader: row[4] ?? '',
-    teacher: row[5] ?? '',
-    instagram: row[6] || undefined
-  }));
+	const rows: string[][] = data.values ?? [];
 
-  return { clubs };
+	const clubs: ClubInfo[] = rows
+		.slice(1)
+		.filter((row) => row[0]?.trim())
+		.map((row) => ({
+			name: row[0] ?? '',
+			description: row[1] ?? '',
+			room: row[2] ?? '',
+			day: row[3] ?? '',
+			studentLeader: row[4] ?? '',
+			teacher: row[5] ?? '',
+			instagram: row[6] || undefined
+		}));
+
+	return { clubs };
 };
