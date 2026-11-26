@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import type { ClubInfo } from '../../lib/components/ClubCard.svelte';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-  const sheetName = 'Clubs'; 
+  const sheetName = 'Sheet1'; 
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
 
   const res = await fetch(url);
