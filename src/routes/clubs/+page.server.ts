@@ -14,11 +14,11 @@ export interface ClubInfo {
 export const load: PageServerLoad = async ({ fetch }) => {
 	console.log('--- LOADING CLUBS ---');
 	const sheetName = 'Sheet1';
-	const sheetId = String(GOOGLE_SHEETS_ID ?? '').trim();
+	const sheetId = String(GOOGLE_SHEET_ID ?? '').trim();
 	const apiKey = String(GOOGLE_SHEETS_API_KEY ?? '').trim();
 
 	console.log('DEBUG SHEET ID:', JSON.stringify(sheetId), 'LENGTH:', sheetId.length);
-	const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
+	const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(sheetName)}?key=${apiKey}`;
 
 	const res = await fetch(url);
 	if (!res.ok) {
