@@ -19,7 +19,9 @@
     navItems = [
         { name: "Home", href: "/" },
         { name: "Announcements", href: "/announcements" },
+        { name: "Events", href: "/events" },
         { name: "Clubs", href: "/clubs" },
+        { name: "FAQ", href: "/faq" },
         { name: "Members", href: "/members" }
     ]
 }: {
