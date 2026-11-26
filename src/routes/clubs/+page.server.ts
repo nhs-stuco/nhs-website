@@ -1,4 +1,4 @@
-import { GOOGLE_SHEETS_API_KEY, GOOGLE_SHEET_ID } from '$app/env/private';
+import { GOOGLE_SHEETS_API_KEY, GOOGLE_SHEET_ID } from '$app/env/public';
 import type { PageServerLoad } from './$types';
 import type { ClubInfo } from '../../lib/components/ClubCard.svelte';
 

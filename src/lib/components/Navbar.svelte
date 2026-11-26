@@ -1,63 +1,51 @@
 <script lang="ts">
-    // creating a new data structure = interface
-    // correct way: defines the shape an object should have
+    import { resolve } from '$app/paths';
+    import type { RouteId } from '$app/types';
 
-    // has to take values of name and href
-    //structure that each navigation item must follow 
     interface NavItem {
         name: string;
-        href: string;
-    };
+        href: RouteId;
+    }
 
-    // export let bigName: string = "Namebar";
-    
-    // since this is a component 
-    // pass props to the component from the parent component
-    // use defaults ex. navitems when not specified in the parent component
     let {
-    bigName = "NHS StuCo",
-    navItems = [
-        { name: "Home", href: "/" },
-        { name: "Announcements", href: "/announcements" },
-        { name: "Events", href: "/events" },
-        { name: "Clubs", href: "/clubs" },
-        { name: "Members", href: "/members" }
-    ]
-}: {
-    bigName?: string;
-    navItems?: NavItem[];
-} = $props();
-
-// ^ basically telling what incoming props are expected and what their types are
-
+        bigName = "NHS StuCo",
+        navItems = [
+            { name: "Home", href: "/" },
+            { name: "Announcements", href: "/announcements" },
+            { name: "Events", href: "/events" },
+            { name: "Clubs", href: "/clubs" },
+            { name: "Members", href: "/members" }
+        ]
+    }: {
+        bigName?: string;
+        navItems?: NavItem[];
+    } = $props();
 </script>
 
 <nav>
-    <a href="/" class="big-name">{bigName} </a>
+    <a href={resolve('/')} class="big-name">{bigName}</a>
     <div class="navItems">
-    <!-- each = for loop in svelte, iterates over navItems array and creates an anchor tag for each item -->
         {#each navItems as item}
-            <a href={item.href}>{item.name}</a>
+            <a href={resolve(item.href)}>{item.name}</a>
         {/each}
     </div>
 </nav>
-    
-    <style>
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
 
-        .big-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+<style>
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
 
-        .navItems {
-            display: flex;
-            gap: 3rem;
-        }
+    .big-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-    </style>
+    .navItems {
+        display: flex;
+        gap: 3rem;
+    }
+</style>
