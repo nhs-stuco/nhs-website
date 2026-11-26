@@ -14,6 +14,8 @@ export interface ClubInfo {
 export const load: PageServerLoad = async ({ fetch }) => {
 	console.log('--- LOADING CLUBS ---');
 	const sheetName = 'Sheet1';
+
+	console.log('DEBUG SHEET ID:', JSON.stringify(sheetId), 'LENGTH:', sheetId.length);
 	const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
 
 	const res = await fetch(url);
