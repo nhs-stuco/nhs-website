@@ -1,5 +1,34 @@
 <script lang="ts">
     import Navbar from '../lib/components/Navbar.svelte';
+    import Faq, { type FaqItem } from '../lib/components/Faq.svelte';
+
+    const faqs: FaqItem[] = [
+        {
+            question: 'What is StuCo?',
+            answer: 'a'
+        },
+        {
+            question: 'How do I join StuCo?',
+            answer: 'b'
+        },
+        {
+            question: 'What is a student activity fee?',
+            answer: 'd'
+        },
+        {
+            question: 'When and where does StuCo meet?',
+            answer: 'c'
+        },
+        {
+            question: 'Who are the teacher advisors for StuCo?',
+            answer: 'd'
+        },
+        {
+            question: 'Who is apart of StuCo?',
+            answer: 'd'
+        }
+    ];
+
 </script>
 
 
@@ -22,6 +51,14 @@
         <h2 class = "text-[4rem] font-black text-center">
             Announcements
         </h2>
+      </section>
+
+      <!-- FAQ -->
+      <section class = "w-[clamp(32rem,60%,56rem)] mx-auto flex flex-col gap-16 py-20">
+        <h2 class = "text-[4rem] font-black text-left">
+          Questions?
+        </h2>
+        <Faq items={faqs} class="border-neutral-200 divide-neutral-200" />
       </section>
 </main>
 
